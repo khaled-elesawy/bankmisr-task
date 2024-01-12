@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CurrenciesDetailsComponent } from './components/currencies-details/currencies-details.component';
 import { CurrenciesConverterComponent } from './components/currencies-converter/currencies-converter.component';
+import { CurrenciesRoutingModule } from './currencies-routing.module';
 
 
 
@@ -12,7 +13,8 @@ import { CurrenciesConverterComponent } from './components/currencies-converter/
     CurrenciesConverterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CurrenciesRoutingModule
   ],
   exports: [
     CurrenciesDetailsComponent,
