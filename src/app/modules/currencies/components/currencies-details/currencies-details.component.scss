@@ -1,0 +1,78 @@
+$black-color: #212529;
+$dark-blue-color: #34495e;
+
+
+.currencies-details {
+    .wrapper {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        width: 80%;
+        margin: auto;
+        padding: 30px 30px;
+        color: $dark-blue-color;
+
+        .single-currency-details {
+            .title {
+                .selected-currency {
+                    font-size: 34px;
+                }
+            }
+
+            .exchange-rates {
+                .date{
+                    .show-date-btn{
+                        margin: 20px 0;
+                    }
+                    form{
+                        display: flex;
+                        ::ng-deep p-calendar{
+                            input{
+                                margin: 0 10px;
+                            }
+                        }
+                    }
+                }
+                .exchange-table {
+                    margin-top: 25px;
+                    thead {
+                        tr {
+                            th {
+                                color: $black-color;
+                                font-weight: 400;
+                                font-size: 24px;
+                            }
+                        }
+                    }
+
+                    tbody {
+                        tr {
+                            td {
+                                color: $dark-blue-color;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .loading{
+                display: flex;
+                justify-content: center;
+                .loader {
+                  border: 4px dotted $dark-blue-color;
+                  border-radius: 50%;
+                  width: 40px;
+                  height: 40px;
+                  animation: rotate 1.5s linear infinite;
+                }
+
+                @keyframes rotate {
+                  0% {
+                    transform: rotate(0deg);
+                  }
+                  100% {
+                    transform: rotate(360deg);
+                  }
+                }
+              }
+        }
+    }
+}

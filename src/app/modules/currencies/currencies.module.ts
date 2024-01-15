@@ -4,7 +4,10 @@ import { CommonModule } from '@angular/common';
 import { CurrenciesDetailsComponent } from './components/currencies-details/currencies-details.component';
 import { CurrenciesConverterComponent } from './components/currencies-converter/currencies-converter.component';
 import { CurrenciesRoutingModule } from './currencies-routing.module';
-
+import { ApiModule } from 'src/app/core/api/api.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
@@ -14,7 +17,12 @@ import { CurrenciesRoutingModule } from './currencies-routing.module';
   ],
   imports: [
     CommonModule,
-    CurrenciesRoutingModule
+    CurrenciesRoutingModule,
+    ApiModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    CalendarModule,
+
   ],
   exports: [
     CurrenciesDetailsComponent,

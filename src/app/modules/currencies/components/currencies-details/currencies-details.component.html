@@ -1,1 +1,49 @@
-<p>currencies-details works!</p>
+
+<section class="currencies-details">
+  <div class="wrapper">
+    <div class="single-currency-details" >
+      <h3 class="title">Exchange Rate for <span class="selected-currency">{{ selectedCurrency }}</span></h3>
+      <div class="exchange-rates" *ngIf="singleCurrencyDetails && !isLoading">
+        <div class="date">
+          <h4>date: {{ singleCurrencyDetails['date'] }}</h4>
+          <button class="btn btn-info show-date-btn" (click)="onShowSpecificDate()">select specific date</button>
+          <form [formGroup]="specificDateForm" (ngSubmit)="onSubmit()" *ngIf="showSpecificDate">
+            <div class="p-field">
+              <label for="selectedDate">Select Date:</label>
+              <p-calendar
+                id="selectedDate"
+                formControlName="selectedDate"
+                [maxDate]="maxSpecificDate"
+                [minDate]="minSpecificDate"
+                [yearRange]="yearRange"
+              ></p-calendar>
+            </div>
+            <button class="btn btn-success" type="submit" [disabled]="specificDateForm.invalid">Go</button>
+          </form>
+        </div>
+        <div class="exchange-table">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">currency</th>
+                <th scope="col">rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let currencyRate of currenciesRates">
+                <td>{{ currencyRate[0] }}</td>
+                <td>{{ currencyRate[1] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="error-msg" *ngIf="errorMessage && !isLoading">
+        <p class="alert alert-danger"> {{ errorMessage }}</p>
+      </div>
+      <div class="loading" *ngIf="isLoading">
+        <div class="loader"></div>
+      </div>
+    </div>
+  </div>
+</section>

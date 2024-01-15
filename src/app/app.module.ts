@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ApiModule } from './core/api/api.module';
+
 import { HeaderModule } from './modules/header/header.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { HeaderModule } from './modules/header/header.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,  
     HeaderModule
   ],
