@@ -19,7 +19,7 @@ export class HeaderComponent {
     this.router.navigate([''])
   }
   goToCurrencyDetails(currency: string){
-    this.currenciesService.selectedCurrencies.next([currency])
+    this.currenciesService.selectedCurrency.next(currency)
     this.router.navigate(['/currencies/currencies-details']);
 
   }
