@@ -1,5 +1,5 @@
 export class CurrenciesEndpointsEnum {
-    static readonly ACCESS_KEY = '0e92efdef6ddbcdfdbec7647da235b3f';
+    static readonly ACCESS_KEY = '89c74c73627b4bcd80f6dc80f2b904f6';
 
     static availableCurrencies(){
         return `http://data.fixer.io/api/latest?access_key=${this.ACCESS_KEY}`;

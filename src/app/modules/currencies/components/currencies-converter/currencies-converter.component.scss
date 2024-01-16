@@ -1,0 +1,204 @@
+$dark-blue-color: #34495e;
+$white-color: #ffffff;
+$white-gray-color: #7F8C8D;
+$purple-color: #8e44ad;
+$black-color: #212529;
+
+
+.currencies-converter {
+    padding: 30px 0;
+
+    .wrapper-form {
+        background: $white-color;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        width: 80%;
+        margin: auto;
+        padding: 30px 30px;
+        text-transform: capitalize;
+        border-radius: 5px;
+
+        .nav-tabs {
+            .nav-item {
+                .nav-link {
+                    color: $dark-blue-color;
+                    text-transform: capitalize;
+                }
+
+                .active {
+                    color: $white-gray-color;
+                }
+            }
+        }
+
+        .tab-content {
+            padding: 20px 10px;
+            color: $dark-blue-color;
+            .select-currency{
+                text-transform: lowercase;
+            }
+            .currencies-conversion-form {
+                text-transform: capitalize;
+
+                .conversion-details {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 25px 0;
+                    .amount,
+                    .base-currency,
+                    .target-currency {
+                        width: 30%;
+                    }
+
+                    .swap {
+                        display: flex;
+                        align-items: flex-start;
+
+                        i {
+                            background: $purple-color;
+                            border-radius: 50%;
+                            color: $white-color;
+                            padding: 10px;
+                        }
+                    }
+                }
+                .submit{
+                    display: flex;
+                    justify-content: center;
+                    .submit-btn{
+                        width: 25%;
+                        background: $purple-color;
+                        border: 1px solid $purple-color;
+                        &:focus{
+                            border: 1px solid $purple-color;
+                            box-shadow: none;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+    .wrapper-result{
+        background: $white-color;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        width: 80%;
+        margin: 25px auto;
+        padding: 30px 30px;
+        text-transform: capitalize;
+        border-radius: 5px;
+        .currency-conversion-details{
+            .title{
+                color: $dark-blue-color;
+                .selected{
+                    font-size: 34px;
+                    color: $purple-color;
+                }
+            }
+            .conversion-rate {
+                .date{
+                    color: $dark-blue-color;
+                    .selected{
+                        color: $purple-color;
+                    }
+                    .show-date-btn{
+                        margin: 20px 0;
+                    }
+                    form{
+                        display: flex;
+                        ::ng-deep p-calendar{
+                            input{
+                                margin: 0 10px;
+                            }
+                        }
+                    }
+                }
+                .exchange-table {
+                    margin-top: 25px;
+                    thead {
+                        tr {
+                            th {
+                                color: $black-color;
+                                font-weight: 400;
+                                font-size: 24px;
+                            }
+                        }
+                    }
+
+                    tbody {
+                        tr {
+                            td {
+                                color: $dark-blue-color;
+                            }
+                        }
+                    }
+                }
+            }
+            .error-msg{
+                margin-top: 10px;
+            }
+            .loading{
+                display: flex;
+                justify-content: center;
+                .loader {
+                  border: 4px dotted $dark-blue-color;
+                  border-radius: 50%;
+                  width: 40px;
+                  height: 40px;
+                  animation: rotate 1.5s linear infinite;
+                }
+
+                @keyframes rotate {
+                  0% {
+                    transform: rotate(0deg);
+                  }
+                  100% {
+                    transform: rotate(360deg);
+                  }
+                }
+              }
+        }
+
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .currencies-converter {
+        .wrapper-form {
+            .tab-content {
+                .currencies-conversion-form {
+                    .conversion-details {
+                        display: flex;
+                        flex-direction: column;
+                        .amount,
+                        .base-currency,
+                        .target-currency {
+                            width: 100%;
+                        }
+
+                        .swap {
+                            margin-bottom: 15px;
+                            justify-content: center;
+                        }
+                    }
+                    .submit{
+                        .submit-btn{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+        .wrapper-result{
+            .currency-conversion-details{
+                .conversion-rate{
+                    form{
+                        align-items: flex-end;
+                        button{
+                            padding: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,1 +1,152 @@
-<p>currencies-converter works!</p>
+<section class="currencies-converter">
+    <div class="wrapper-form">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="currencies-conversion-tab" data-toggle="tab"
+                    data-target="#currencies-conversion" type="button" role="tab" aria-controls="currencies-conversion"
+                    aria-selected="true">
+                    <span *ngIf="!mobileScreen">currencies conversion</span>
+                    <span *ngIf="mobileScreen">convert</span>
+                </button>
+            </li>
+            <li class="nav-item" role="presentation" (click)="onSelectSingleCurrency()">
+                <button class="nav-link" id="single-currency-tab" data-toggle="tab" data-target="#single-currency"
+                    type="button" role="tab" aria-controls="single-currency" aria-selected="false">
+                    <span *ngIf="!mobileScreen">single currency</span>
+                    <span *ngIf="mobileScreen">currency</span>
+                </button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="currencies-conversion" role="tabpanel"
+                aria-labelledby="currencies-conversion-tab">
+                <form class="currencies-conversion-form" [formGroup]="conversionForm" (ngSubmit)="onSubmitConversionForm()">
+
+                    <div class="conversion-details">
+                        <div class="input-group mb-3 amount">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="amount">amount</label>
+
+                            </div>
+                            <input type="number" id="amount" class="form-control" aria-label="amount"
+                                aria-describedby="basic-addon1" formControlName="amount">
+                        </div>
+
+                        <div class="input-group mb-3 base-currency">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="baseCurrency">
+                                    <span *ngIf="!mobileScreen">base currency</span>
+                                    <span *ngIf="mobileScreen">base</span>
+                                </label>
+                            </div>
+                            <select class="custom-select" id="baseCurrency" formControlName="baseCurrency">
+                                <option *ngFor="let currency of availableCurrenciesRates">{{currency[0]}}</option>
+                            </select>
+                        </div>
+
+                        <div class="swap">
+                            <i class="bi bi-arrow-left-right"></i>
+                        </div>
+
+                        <div class="input-group mb-3 target-currency">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="targetCurrency">
+                                    <span *ngIf="!mobileScreen">target currency</span>
+                                    <span *ngIf="mobileScreen">target</span>
+                                </label>
+                            </div>
+                            <select class="custom-select" id="targetCurrency" formControlName="targetCurrency">
+                                <option [ngValue]="null"></option>
+                                <option *ngFor="let currency of availableCurrenciesRates">{{currency[0]}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="error-msg" *ngIf="sameCurrenciesError">
+                        <p class="alert alert-danger">kindly select a different currencies!</p>
+                    </div>
+                    <div class="submit">
+                        <button type="submit" [disabled]="conversionForm.invalid"
+                            class="btn btn-success submit-btn">go</button>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="single-currency" role="tabpanel" aria-labelledby="single-currency-tab">
+               <span class="select-currency"> kindly select a currency:</span>
+                <form class="currencies-conversion-form" [formGroup]="singleCurrencyForm" (ngSubmit)="onSubmitSingleCurrencyForm()">
+
+                    <div class="conversion-details">
+                        <div class="input-group mb-3 base-currency">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="baseCurrency">
+                                    <span *ngIf="!mobileScreen">base currency</span>
+                                    <span *ngIf="mobileScreen">base</span>
+                                </label>
+                            </div>
+                            <select class="custom-select" id="baseCurrency" formControlName="baseCurrency">
+                                <option [ngValue]="null"></option>
+                                <option *ngFor="let currency of availableCurrenciesRates">{{currency[0]}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="submit">
+                        <button type="submit" [disabled]="singleCurrencyForm.invalid"
+                            class="btn btn-success submit-btn">go</button>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"></div>
+        </div>
+    </div>
+
+    <div class="wrapper-result" *ngIf="currencyConversionDetails || specificDateConversionDetails || errorMessage">
+        <div class="currency-conversion-details">
+            <h3 class="title" *ngIf="currencyConversionDetails && !specificDateConversionDetails">
+                Exchange Rate of amount 
+                <span class="selected">{{ currencyConversionDetails['query']['amount'] }} </span>
+                <span class="selected">{{ currencyConversionDetails['query']['from'] }}</span>
+                to
+                <span class="selected">{{ currencyConversionDetails['query']['to'] }}</span>
+                is equal
+                <span class="selected">{{ currencyConversionDetails['info']['rate'] }}</span>
+
+            </h3>
+
+            <h3 class="title" *ngIf="specificDateConversionDetails">
+                Exchange Rate of amount 
+                <span class="selected">1 </span>
+                <span class="selected">{{ specificDateConversionDetails['base'] }}</span>
+                to
+                <span class="selected">{{ specificDateTargetCurrency }}</span>
+                is equal
+                <span class="selected">{{ specificDateTargetCurrencyValue }}</span>
+
+            </h3>
+            <div class="conversion-rate">
+                <div class="date" *ngIf="currencyConversionDetails">
+                    <h4 *ngIf="!specificDateConversionDetails">date: <span class="selected" >{{ conversionDate }}</span></h4>
+                    <h4 *ngIf="specificDateConversionDetails">date: <span class="selected" >{{ specificDateConversionDetails['date'] }}</span></h4>
+
+                    <button class="btn btn-info show-date-btn" (click)="onShowSpecificDate()">select specific
+                        date</button>
+                    <form [formGroup]="specificDateForm" (ngSubmit)="onSubmitSpecificDateForm()" *ngIf="showSpecificDate">
+                        <div class="p-field">
+                            <label for="selectedDate">Select Date:</label>
+                            <p-calendar id="selectedDate" formControlName="selectedDate" [maxDate]="maxSpecificDate"
+                                [minDate]="minSpecificDate" [yearRange]="yearRange"></p-calendar>
+                        </div>
+                        <button class="btn btn-success" type="submit" [disabled]="specificDateForm.invalid">Go</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="error-msg" *ngIf="errorMessage && !isLoading">
+                <p class="alert alert-danger"> {{ errorMessage }}</p>
+            </div>
+            <div class="loading" *ngIf="isLoading">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
+</section>
