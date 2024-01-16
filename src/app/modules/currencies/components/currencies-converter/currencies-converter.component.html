@@ -20,7 +20,8 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="currencies-conversion" role="tabpanel"
                 aria-labelledby="currencies-conversion-tab">
-                <form class="currencies-conversion-form" [formGroup]="conversionForm" (ngSubmit)="onSubmitConversionForm()">
+                <form class="currencies-conversion-form" [formGroup]="conversionForm"
+                    (ngSubmit)="onSubmitConversionForm()">
 
                     <div class="conversion-details">
                         <div class="input-group mb-3 amount">
@@ -72,8 +73,9 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="single-currency" role="tabpanel" aria-labelledby="single-currency-tab">
-               <span class="select-currency"> kindly select a currency:</span>
-                <form class="currencies-conversion-form" [formGroup]="singleCurrencyForm" (ngSubmit)="onSubmitSingleCurrencyForm()">
+                <span class="select-currency"> kindly select a currency:</span>
+                <form class="currencies-conversion-form" [formGroup]="singleCurrencyForm"
+                    (ngSubmit)="onSubmitSingleCurrencyForm()">
 
                     <div class="conversion-details">
                         <div class="input-group mb-3 base-currency">
@@ -102,7 +104,7 @@
     <div class="wrapper-result" *ngIf="currencyConversionDetails || specificDateConversionDetails || errorMessage">
         <div class="currency-conversion-details">
             <h3 class="title" *ngIf="currencyConversionDetails && !specificDateConversionDetails">
-                Exchange Rate of amount 
+                Exchange Rate of amount
                 <span class="selected">{{ currencyConversionDetails['query']['amount'] }} </span>
                 <span class="selected">{{ currencyConversionDetails['query']['from'] }}</span>
                 to
@@ -113,7 +115,7 @@
             </h3>
 
             <h3 class="title" *ngIf="specificDateConversionDetails">
-                Exchange Rate of amount 
+                Exchange Rate of amount
                 <span class="selected">1 </span>
                 <span class="selected">{{ specificDateConversionDetails['base'] }}</span>
                 to
@@ -124,12 +126,15 @@
             </h3>
             <div class="conversion-rate">
                 <div class="date" *ngIf="currencyConversionDetails">
-                    <h4 *ngIf="!specificDateConversionDetails">date: <span class="selected" >{{ conversionDate }}</span></h4>
-                    <h4 *ngIf="specificDateConversionDetails">date: <span class="selected" >{{ specificDateConversionDetails['date'] }}</span></h4>
+                    <h4 *ngIf="!specificDateConversionDetails">date: <span class="selected">{{ conversionDate }}</span>
+                    </h4>
+                    <h4 *ngIf="specificDateConversionDetails">date: <span class="selected">{{
+                            specificDateConversionDetails['date'] }}</span></h4>
 
                     <button class="btn btn-info show-date-btn" (click)="onShowSpecificDate()">select specific
                         date</button>
-                    <form [formGroup]="specificDateForm" (ngSubmit)="onSubmitSpecificDateForm()" *ngIf="showSpecificDate">
+                    <form [formGroup]="specificDateForm" (ngSubmit)="onSubmitSpecificDateForm()"
+                        *ngIf="showSpecificDate">
                         <div class="p-field">
                             <label for="selectedDate">Select Date:</label>
                             <p-calendar id="selectedDate" formControlName="selectedDate" [maxDate]="maxSpecificDate"
@@ -140,13 +145,14 @@
                 </div>
 
             </div>
-
             <div class="error-msg" *ngIf="errorMessage && !isLoading">
+
                 <p class="alert alert-danger"> {{ errorMessage }}</p>
             </div>
             <div class="loading" *ngIf="isLoading">
                 <div class="loader"></div>
             </div>
         </div>
+
     </div>
 </section>

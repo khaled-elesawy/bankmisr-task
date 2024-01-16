@@ -1,6 +1,6 @@
 $black-color: #212529;
 $dark-blue-color: #34495e;
-
+$purple-color: #8e44ad;
 
 .currencies-details {
     .wrapper {
@@ -14,11 +14,16 @@ $dark-blue-color: #34495e;
             .title {
                 .selected-currency {
                     font-size: 34px;
+                    color: $purple-color;
                 }
             }
 
             .exchange-rates {
                 .date{
+                    .selected{
+                        font-size: 34px;
+                        color: $purple-color;
+                    }
                     .show-date-btn{
                         margin: 20px 0;
                     }
@@ -50,6 +55,11 @@ $dark-blue-color: #34495e;
                             }
                         }
                     }
+                }
+            }
+            .error-msg{
+                p{
+                    overflow: hidden;
                 }
             }
 
